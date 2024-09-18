@@ -1,0 +1,48 @@
+.control-panel {
+    background-color: #f4f4f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 20px auto;
+  }
+  
+  .control-panel label {
+    font-size: 16px;
+    font-weight: 500;
+    margin-right: 10px;
+  }
+  
+  .control-panel select, .control-panel input {
+    padding: 8px;
+    margin: 10px 0;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  .control-panel button {
+    background-color: #3498db;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .control-panel button:hover {
+    background-color: #2980b9;
+  }
+  
+  .control-panel div {
+    margin-bottom: 15px;
+  }
+  
+  .control-panel input {
+    font-size: 14px;
+    height: 35px;
+  }

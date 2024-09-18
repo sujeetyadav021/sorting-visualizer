@@ -13,12 +13,12 @@
   }
   
   .bar {
-    width: 20px;
-    background-color: #61dafb;
+    width: 60px;
+    background-color: #50d9ff;
     margin: 0 2px;
   }
   
   .bar-value {
     margin-top: 5px;
-    font-size: 12px;
+    font-size: 20px;
   }

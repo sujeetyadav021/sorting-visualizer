@@ -1,29 +1,39 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import '../styles/ControlPanel.css';
 
 function ControlPanel({ onSort }) {
   const [algorithm, setAlgorithm] = useState('bubble');
   const [dataset, setDataset] = useState('');
+  const [loading, setLoading] = useState(false); 
+  const [error, setError] = useState(null);      
+
 
   const handleSort = async () => {
-    const datasetArray = dataset.split(',').map(Number);
+    const datasetArray = dataset.split(',').map(Number); 
+
+    setLoading(true); 
+    setError(null);   
 
     try {
       const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/sort`, {
         dataset: datasetArray,
-        algorithm
+        algorithm,
       });
 
-      onSort(response.data);
+      onSort(response.data); 
     } catch (error) {
       console.error('Error sorting data:', error);
+      setError('Failed to sort dataset. Please try again.');
+    } finally {
+      setLoading(false); 
     }
   };
 
   return (
-    <div>
+    <div className="control-panel">
       <div>
-        <label>Select Sorting Algorithm: </label>
+        <label>Select Sorting Algorithm:</label>
         <select value={algorithm} onChange={(e) => setAlgorithm(e.target.value)}>
           <option value="bubble">Bubble Sort</option>
           <option value="selection">Selection Sort</option>
@@ -36,7 +46,7 @@ function ControlPanel({ onSort }) {
       </div>
 
       <div>
-        <label>Input Dataset (comma-separated numbers): </label>
+        <label>Input Dataset (comma-separated numbers):</label>
         <input
           type="text"
           value={dataset}
@@ -45,7 +55,11 @@ function ControlPanel({ onSort }) {
         />
       </div>
 
-      <button onClick={handleSort}>Sort</button>
+      <button onClick={handleSort} disabled={loading || !dataset}>
+        {loading ? 'Sorting...' : 'Sort'}
+      </button>
+
+      {error && <p className="error-message">{error}</p>}
     </div>
   );
 }
