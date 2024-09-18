@@ -1,29 +1,33 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import ControlPanel from './components/ControlPanel';
 import Visualizer from './components/Visualizer';
 import './App.css';
 
 function App() {
-  const [sortedDataset, setSortedDataset] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [dataset, setDataset] = useState([]);
+  const [steps, setSteps] = useState([]);
+  const [stepIndex, setStepIndex] = useState(0);
 
-  const handleSort = async (data) => {
-    setLoading(true);
-    try {
-      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/sort`, data);
-      setSortedDataset(response.data.sortedDataset);
-    } catch (error) {
-      console.error('Error sorting the data', error);
-    }
-    setLoading(false);
+  const handleSort = (sortingSteps) => {
+    setSteps(sortingSteps);
+    setStepIndex(0); // Start from the first step
+
+    // Automatically animate the sorting steps
+    let i = 0;
+    const interval = setInterval(() => {
+      setStepIndex(i);
+      i++;
+      if (i >= sortingSteps.length) {
+        clearInterval(interval);
+      }
+    }, 500); // Adjust the delay (in ms) for animation
   };
 
   return (
     <div className="App">
       <h1>Sorting Visualizer</h1>
       <ControlPanel onSort={handleSort} />
-      {loading ? <p>Sorting...</p> : <Visualizer dataset={sortedDataset} />}
+      {steps.length > 0 && <Visualizer dataset={steps[stepIndex]} />}
     </div>
   );
 }

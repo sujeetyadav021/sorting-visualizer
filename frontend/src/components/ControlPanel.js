@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 function ControlPanel({ onSort }) {
-  const [algorithm, setAlgorithm] = useState('quick');
+  const [algorithm, setAlgorithm] = useState('bubble');
   const [dataset, setDataset] = useState('');
 
-  const handleSort = () => {
+  const handleSort = async () => {
     const datasetArray = dataset.split(',').map(Number);
-    onSort({ dataset: datasetArray, algorithm });
+
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/sort`, {
+        dataset: datasetArray,
+        algorithm
+      });
+
+      onSort(response.data);
+    } catch (error) {
+      console.error('Error sorting data:', error);
+    }
   };
 
   return (
@@ -14,9 +25,13 @@ function ControlPanel({ onSort }) {
       <div>
         <label>Select Sorting Algorithm: </label>
         <select value={algorithm} onChange={(e) => setAlgorithm(e.target.value)}>
-          <option value="quick">Quick Sort</option>
+          <option value="bubble">Bubble Sort</option>
+          <option value="selection">Selection Sort</option>
+          <option value="insertion">Insertion Sort</option>
           <option value="merge">Merge Sort</option>
-          {/* Add more algorithms if needed */}
+          <option value="quick">Quick Sort</option>
+          <option value="heap">Heap Sort</option>
+          <option value="shell">Shell Sort</option>
         </select>
       </div>
 
