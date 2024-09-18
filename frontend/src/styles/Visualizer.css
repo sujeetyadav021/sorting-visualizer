@@ -1,0 +1,13 @@
+
+.visualizer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-top: 20px;
+  }
+  
+  .bar {
+    width: 20px;
+    background-color: #61dafb;
+    margin: 0 2px;
+  }
