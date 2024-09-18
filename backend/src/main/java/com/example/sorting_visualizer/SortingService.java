@@ -23,11 +23,11 @@ public class SortingService {
                     int temp = array.get(j);
                     array.set(j, array.get(j + 1));
                     array.set(j + 1, temp);
-                    steps.add(new ArrayList<>(array)); // capture this step
+                    steps.add(new ArrayList<>(array)); 
                     swapped = true;
                 }
             }
-            if (!swapped) break; // if no elements were swapped, the array is sorted
+            if (!swapped) break; 
         }
         return steps;
     }
@@ -36,7 +36,7 @@ public class SortingService {
     public List<List<Integer>> selectionSort(List<Integer> array) {
         List<List<Integer>> steps = new ArrayList<>();
         int n = array.size();
-        steps.add(new ArrayList<>(array)); // initial state
+        steps.add(new ArrayList<>(array)); 
 
         for (int i = 0; i < n - 1; i++) {
             int minIdx = i;
@@ -45,11 +45,10 @@ public class SortingService {
                     minIdx = j;
                 }
             }
-            // Swap the found minimum element with the first element
             int temp = array.get(minIdx);
             array.set(minIdx, array.get(i));
             array.set(i, temp);
-            steps.add(new ArrayList<>(array)); // capture this step
+            steps.add(new ArrayList<>(array)); 
         }
         return steps;
     }
@@ -57,7 +56,7 @@ public class SortingService {
     // Insertion Sort
     public List<List<Integer>> insertionSort(List<Integer> array) {
         List<List<Integer>> steps = new ArrayList<>();
-        steps.add(new ArrayList<>(array)); // initial state
+        steps.add(new ArrayList<>(array)); 
 
         for (int i = 1; i < array.size(); i++) {
             int key = array.get(i);
@@ -65,11 +64,11 @@ public class SortingService {
 
             while (j >= 0 && array.get(j) > key) {
                 array.set(j + 1, array.get(j));
-                steps.add(new ArrayList<>(array)); // capture this step
+                steps.add(new ArrayList<>(array)); 
                 j = j - 1;
             }
             array.set(j + 1, key);
-            steps.add(new ArrayList<>(array)); // capture this step
+            steps.add(new ArrayList<>(array));
         }
         return steps;
     }
@@ -92,21 +91,21 @@ public class SortingService {
                 j++;
             }
             k++;
-            steps.add(new ArrayList<>(array)); // capture this step
+            steps.add(new ArrayList<>(array)); 
         }
 
         while (i < n1) {
             array.set(k, leftArray.get(i));
             i++;
             k++;
-            steps.add(new ArrayList<>(array)); // capture this step
+            steps.add(new ArrayList<>(array)); 
         }
 
         while (j < n2) {
             array.set(k, rightArray.get(j));
             j++;
             k++;
-            steps.add(new ArrayList<>(array)); // capture this step
+            steps.add(new ArrayList<>(array)); 
         }
     }
 
@@ -125,7 +124,7 @@ public class SortingService {
 
     public List<List<Integer>> mergeSort(List<Integer> array) {
         List<List<Integer>> steps = new ArrayList<>();
-        steps.add(new ArrayList<>(array)); // initial state
+        steps.add(new ArrayList<>(array)); 
         return mergeSort(array, 0, array.size() - 1, steps);
     }
 
@@ -140,13 +139,13 @@ public class SortingService {
                 int temp = array.get(i);
                 array.set(i, array.get(j));
                 array.set(j, temp);
-                steps.add(new ArrayList<>(array)); // capture this step
+                steps.add(new ArrayList<>(array)); 
             }
         }
         int temp = array.get(i + 1);
         array.set(i + 1, array.get(high));
         array.set(high, temp);
-        steps.add(new ArrayList<>(array)); // capture this step
+        steps.add(new ArrayList<>(array)); 
         return i + 1;
     }
 
@@ -163,7 +162,7 @@ public class SortingService {
 
     public List<List<Integer>> quickSort(List<Integer> array) {
         List<List<Integer>> steps = new ArrayList<>();
-        steps.add(new ArrayList<>(array)); // initial state
+        steps.add(new ArrayList<>(array)); 
         return quickSort(array, 0, array.size() - 1, steps);
     }
 
@@ -185,7 +184,7 @@ public class SortingService {
             int swap = array.get(i);
             array.set(i, array.get(largest));
             array.set(largest, swap);
-            steps.add(new ArrayList<>(array)); // capture this step
+            steps.add(new ArrayList<>(array)); 
 
             heapify(array, n, largest, steps);
         }
@@ -195,7 +194,7 @@ public class SortingService {
     public List<List<Integer>> heapSort(List<Integer> array) {
         List<List<Integer>> steps = new ArrayList<>();
         int n = array.size();
-        steps.add(new ArrayList<>(array)); // initial state
+        steps.add(new ArrayList<>(array)); 
 
         for (int i = n / 2 - 1; i >= 0; i--) {
             heapify(array, n, i, steps);
@@ -205,7 +204,7 @@ public class SortingService {
             int temp = array.get(0);
             array.set(0, array.get(i));
             array.set(i, temp);
-            steps.add(new ArrayList<>(array)); // capture this step
+            steps.add(new ArrayList<>(array)); 
 
             heapify(array, i, 0, steps);
         }
@@ -216,7 +215,7 @@ public class SortingService {
     public List<List<Integer>> shellSort(List<Integer> array) {
         List<List<Integer>> steps = new ArrayList<>();
         int n = array.size();
-        steps.add(new ArrayList<>(array)); // initial state
+        steps.add(new ArrayList<>(array)); 
 
         for (int gap = n / 2; gap > 0; gap /= 2) {
             for (int i = gap; i < n; i++) {
@@ -224,10 +223,10 @@ public class SortingService {
                 int j;
                 for (j = i; j >= gap && array.get(j - gap) > temp; j -= gap) {
                     array.set(j, array.get(j - gap));
-                    steps.add(new ArrayList<>(array)); // capture this step
+                    steps.add(new ArrayList<>(array)); 
                 }
                 array.set(j, temp);
-                steps.add(new ArrayList<>(array)); // capture this step
+                steps.add(new ArrayList<>(array)); 
             }
         }
         return steps;

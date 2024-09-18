@@ -4,29 +4,34 @@ import Visualizer from './components/Visualizer';
 import './App.css';
 
 function App() {
-  const [dataset, setDataset] = useState([]);
-  const [steps, setSteps] = useState([]);
-  const [stepIndex, setStepIndex] = useState(0);
+  const [steps, setSteps] = useState([]);       // Stores sorting steps
+  const [stepIndex, setStepIndex] = useState(0); // Tracks current step in sorting
 
+  // Handles the sorting process and animates the steps
   const handleSort = (sortingSteps) => {
-    setSteps(sortingSteps);
-    setStepIndex(0); // Start from the first step
+    setSteps(sortingSteps);  // Set the sorting steps
+    setStepIndex(0);         // Reset step index to start
 
-    // Automatically animate the sorting steps
     let i = 0;
     const interval = setInterval(() => {
-      setStepIndex(i);
+      setStepIndex(i);       // Update step index every 500ms
       i++;
       if (i >= sortingSteps.length) {
-        clearInterval(interval);
+        clearInterval(interval); // Stop when all steps are visualized
       }
-    }, 500); // Adjust the delay (in ms) for animation
+    }, 500); // 500ms per step (adjust speed here)
   };
 
   return (
     <div className="App">
-      <h1>Sorting Visualizer</h1>
+      <header>
+        <h1>Sorting Visualizer</h1>
+      </header>
+
+      {/* Control Panel to initiate sorting */}
       <ControlPanel onSort={handleSort} />
+
+      {/* Visualize only if there are steps to display */}
       {steps.length > 0 && <Visualizer dataset={steps[stepIndex]} />}
     </div>
   );

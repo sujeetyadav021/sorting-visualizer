@@ -10,7 +10,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/sort")
-@CrossOrigin(origins = "http://localhost:3000") // Allow CORS for frontend
+@CrossOrigin(origins = "http://localhost:3000") 
 public class SortingController {
 
     @Autowired
@@ -18,10 +18,8 @@ public class SortingController {
 
     @PostMapping
     public List<List<Integer>> sort(@RequestBody Map<String, Object> request) {
-        // Extract the dataset and ensure type safety
         List<?> rawDataset = (List<?>) request.get("dataset");
 
-        // Safely cast to List<Integer>
         List<Integer> dataset = new ArrayList<>();
         for (Object obj : rawDataset) {
             if (obj instanceof Integer) {
@@ -29,12 +27,10 @@ public class SortingController {
             }
         }
 
-        // Extract sorting algorithm
         String algorithm = (String) request.get("algorithm");
 
         List<List<Integer>> sortedSteps = null;
 
-        // Use the selected algorithm
         switch (algorithm.toLowerCase()) {
             case "bubble":
                 sortedSteps = sortingService.bubbleSort(dataset);
