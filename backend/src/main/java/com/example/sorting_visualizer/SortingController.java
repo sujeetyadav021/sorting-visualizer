@@ -8,9 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin(origins = "https://sorting-visualizer-jet-xi.vercel.app/")
 @RestController
 @RequestMapping("/api/sort")
-@CrossOrigin(origins = "http://localhost:3000") 
+//@CrossOrigin(origins = "http://localhost:3000") 
 public class SortingController {
 
     @Autowired
